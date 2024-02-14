@@ -14,15 +14,13 @@ log(chalk.green.inverse("Загадано число в диапазоне от 
 // Функция, которая задает пользователю вопрос и обрабатывает ответ
 function guessNumber() {
   rl.question("Введите число: ", (answer) => {
-    // Проверяем, является ли введенное значение числом
-    if (!answer) {
+    // Проверяем на пустое значение и число
+    if (!answer || isNaN(answer)) {
       log("ОШИБКА!:", chalk.red("Пожалуйста, введите число"));
       guessNumber();
       return;
     }
-
     const number = parseInt(answer);
-
     // Сравниваем введенное число с загаданным
     if (number > secretNumber) {
       log(chalk.bgYellow("Меньше"));
