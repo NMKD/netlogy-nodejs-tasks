@@ -1,21 +1,22 @@
 const readline = require("node:readline");
-
+const chalk = require("chalk");
 // Создаем интерфейс для чтения и записи из стандартного потока ввода
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-const secretNumber = Math.floor(Math.random() * 101);
+const log = console.log;
+const secretNumber = Math.floor(Math.random() * 5);
 
-console.log("Загадано число в диапазоне от 0 до 100");
+log(chalk.green.inverse("Загадано число в диапазоне от 0 до 100"));
 
 // Функция, которая задает пользователю вопрос и обрабатывает ответ
 function guessNumber() {
   rl.question("Введите число: ", (answer) => {
     // Проверяем, является ли введенное значение числом
-    if (isNaN(answer)) {
-      console.log("Пожалуйста, введите число");
+    if (!answer) {
+      log("ОШИБКА!:", chalk.red("Пожалуйста, введите число"));
       guessNumber();
       return;
     }
@@ -24,13 +25,13 @@ function guessNumber() {
 
     // Сравниваем введенное число с загаданным
     if (number > secretNumber) {
-      console.log("Меньше");
+      log(chalk.bgYellow("Меньше"));
       guessNumber();
     } else if (number < secretNumber) {
-      console.log("Больше");
+      log(chalk.bgYellow("Больше"));
       guessNumber();
     } else {
-      console.log(`Отгадано число ${number}`);
+      log(chalk.bgGreen(`Отгадано число ${number}`));
       rl.close();
     }
   });

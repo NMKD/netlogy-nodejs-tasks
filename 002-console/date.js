@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const yargs = require("yargs/yargs")(process.argv.slice(2));
+const chalk = require("chalk");
 
 /// Task 1
 // Команда "current"
@@ -26,13 +27,13 @@ yargs.command({
   handler: (argv) => {
     const now = new Date();
     if (argv.year) {
-      console.log(now.getFullYear());
+      console.log("Сейчас год:", chalk.green(now.getFullYear()));
     } else if (argv.month) {
-      console.log(now.getMonth() + 1);
+      console.log("Месяц сейчас:", chalk.green(now.getMonth() + 1));
     } else if (argv.date) {
-      console.log(now.getDate());
+      console.log("Дата сейчас:", chalk.green(now.getDate()));
     } else {
-      console.log(now.toISOString());
+      console.log("ISO Date:", chalk.green(now.toISOString()));
     }
   },
 });
